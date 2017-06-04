@@ -86,12 +86,6 @@ module.exports = {
         include: [resolve('src'), resolve('test')]
       },
 
-      // 对css文件解析
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-
       // url-loader，参考：https://github.com/webpack-contrib/url-loader
       // 对图片文件路径进行MD5序列化，同时限定小于 10kb 将返回 DataUrl
       {

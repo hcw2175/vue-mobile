@@ -34,11 +34,7 @@ exports.cssLoaders = function (options) {
     loader: 'css-loader',
     options: {
       minimize: process.env.NODE_ENV === 'production',
-      sourceMap: options.sourceMap,
-      // vue-loader options go here
-      postcss: [require('autoprefixer')({
-        browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8']
-      })]
+      sourceMap: options.sourceMap
     }
   };
 
