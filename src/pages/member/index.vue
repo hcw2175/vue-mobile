@@ -1,16 +1,12 @@
 <style lang="scss" scoped>
-  @import "~@/assets/scss/exports.scss";
+  @import "~variables";
 
   .header {
     padding: rem(25px);
     background-color: $primary;
-    background-image: -webkit-linear-gradient(top, #2F8CFC, #03A9F4);
-    background-image:         linear-gradient(to bottom, #2F8CFC, #03A9F4);
+    background-image: -webkit-linear-gradient(top, $blue-dark-2, $blue-1);
+    background-image:         linear-gradient(to bottom, $blue-dark-2, $blue-1);
     text-align: center;
-  }
-
-  .header-title{
-
   }
 </style>
 
@@ -19,8 +15,10 @@
     <div class="header">
       <img src="~img/avatar.png" width="100" height="100" class="img-circle"/>
 
-      <h2 class="color-white">hucw</h2>
+      <div class="color-white font-l margin-top">hucw</div>
     </div>
+
+    <img src="~img/test.jpg"/>
   </div>
 </template>
 

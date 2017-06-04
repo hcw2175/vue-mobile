@@ -48,8 +48,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'assets': resolve('src/assets'),
       'img': resolve('src/assets/images'),
+      'variables': resolve('src/assets/scss/exports.scss'),
     }
   },
 
@@ -86,10 +86,10 @@ module.exports = {
         include: [resolve('src'), resolve('test')]
       },
 
-      // 对scss文件解析
+      // 对css文件解析
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader'
+        loader: 'style-loader!css-loader'
       },
 
       // url-loader，参考：https://github.com/webpack-contrib/url-loader
@@ -106,7 +106,7 @@ module.exports = {
       // url-loader，参考：https://github.com/webpack-contrib/url-loader
       // 对字体图标文件路径进行MD5序列化，同时限定小于 10kb 将返回 DataUrl
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(woff2?|eot|ttf|otf|woff)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,

@@ -2,19 +2,19 @@
 $primary: #20A0FF;
 
 // 辅助色
-$success: #27c24c;
-$warning: #F7BA2A;
-$danger: #FF4949;
-
+$success: #5cb85c;
+$warning: #f0ad4e;
+$danger: #d9534f;
+$info: #5bc0de;
 
 // 文本颜色
 $black: #1F2D3D;
 $black-light: #324057;
 $black-extra: #475669;
 
-$text_primary: #1F2D3D;
-$text_second: #324057;
-$text_third: #475669;
+$font-primary: #1F2D3D;
+$font-light: #324057;
+$font-lighter: #475669;
 
 $silver: #8492A6;
 $silver-light: #99A9BF;
@@ -31,8 +31,8 @@ $white-dark: #F9FAFC;
 $page_bg: #E5E9F2;
 
 // 边框颜色
+$border: lighten(#DDD, 5%);
 $border-gray: #DDD;
-$border: lighten($border-gray, 5%);
 
 // 其它颜色
 $red-1: #d9534f;
