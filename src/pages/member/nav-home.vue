@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss" scoped type="text/scss">
   @import "~variables";
 
   .header {
@@ -23,7 +23,10 @@
     <div class="padding-m">
       <i class="fa fa-user"></i>
     </div>
-    <img src="~img/test.jpg"/>
+
+    <div class="padding-m">
+      <img src="~img/test.jpg"/>
+    </div>
   </div>
 </template>
 

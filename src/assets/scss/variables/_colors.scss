@@ -1,24 +1,19 @@
 // 主色
-$primary: #20A0FF;
+$primary: #2d8cf0;
+$primary-light: #5cadff;
+$primary-dark: #3091f2;
 
 // 辅助色
-$success: #5cb85c;
-$warning: #f0ad4e;
-$danger: #d9534f;
-$info: #5bc0de;
+$success: #19be6b;
+$warning: #ff9900;
+$danger: #ed3f14;
+$info: #00BCD4;
 
 // 文本颜色
-$black: #1F2D3D;
-$black-light: #324057;
-$black-extra: #475669;
-
-$font-primary: #1F2D3D;
-$font-light: #324057;
-$font-lighter: #475669;
-
-$silver: #8492A6;
-$silver-light: #99A9BF;
-$silver-extra: #C0CCDA;
+$font-title: #1c2438;
+$font-primary: #495060;
+$font-light: #80848f;
+$font-lighter: #bbbec4;
 
 $gray: #D3DCE6;
 $gray-light: #E5E9F2;
@@ -27,36 +22,42 @@ $gray-extra: #EFF2F7;
 $white: #ffffff;
 $white-dark: #F9FAFC;
 
+
 // 页面背景色
-$page_bg: #E5E9F2;
+$page_bg: #f8f8f9;
+
 
 // 边框颜色
-$border: lighten(#DDD, 5%);
-$border-gray: #DDD;
+$border: #dddee1;
+$divider: #e9eaec;
+
 
 // 其它颜色
 $red-1: #d9534f;
 $red-2: #FF0000;
+
 $blue-1: #20A0FF;
 $blue-2: #58B7FF;
 $blue-3: #58B7FF;
 $blue-dark-1: #0066CC;
 $blue-dark-2: #0066FF;
+
 $orange-1: #FF5722;
 $orange-2: #FF6633;
 $orange-3: #E27A3F;
 $orange-4: #edce8c;
+
 $green-1: #18BA1D;
 $green-2: #339900;
 $green-3: #209C83;
 $green-4: #339966;
+
 $pink-1: #FF6666;
 $pink-2: #FF3366;
+
 $yellow-1: #f0ad4e;
 $yellow-2: #FF9933;
+
 $purple: #CC33FF;
+
 $transparent: rgba(0,0,0,0);
-$light-1: #f2f2f2;
-$light-2: #F5F5F5;
-$cyan: #5bc0de;
-$cyan-2: #00BCD4;
