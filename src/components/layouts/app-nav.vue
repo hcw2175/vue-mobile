@@ -2,15 +2,14 @@
   @import "~variables";
 
   .app-nav {
-    /*.mint-tabbar {
-      @include box-shadow(0, -1px, 5px, 0.2)
-    }*/
+    max-width: $max-width;
+    height: rem($nav-bottom-height);
 
-    .mint-tabbar .mint-tab-item {
+    .app-nav-tabbar .nav-item {
       color: $font-light;
-      padding: rem(5px) 0;
+      padding: rem(6px) 0;
     }
-    .mint-tabbar .mint-tab-item.is-selected {
+    .app-nav-tabbar .nav-item.is-selected {
       color: $primary;
     }
   }
@@ -18,20 +17,20 @@
 
 <template>
   <div class="app-nav">
-    <mt-tabbar :fixed="true" v-model="navId">
-      <mt-tab-item id="home" @click.native="onNavClick('home', '/')">
+    <mt-tabbar class="app-nav-tabbar" :fixed="true" v-model="currentNavId">
+      <mt-tab-item id="home" class="nav-item" @click.native="$router.push('/')">
         <i class="fa fa-home icon-default"></i>
         <div class="margin-top-s">首页</div>
       </mt-tab-item>
-      <mt-tab-item id="devices" @click.native="onNavClick('devices', '/devices')">
+      <mt-tab-item id="devices" class="nav-item" @click.native="$router.push('/devices')">
         <i class="fa fa-leaf icon-default"></i>
         <div class="margin-top-s">设备</div>
       </mt-tab-item>
-      <mt-tab-item id="orders" @click.native="onNavClick('orders', '/orders')">
+      <mt-tab-item id="orders" class="nav-item" @click.native="$router.push('/orders')">
         <i class="fa fa-file-text icon-default"></i>
         <div class="margin-top-s">订单</div>
       </mt-tab-item>
-      <mt-tab-item id="my" @click.native="onNavClick('my', '/my')">
+      <mt-tab-item id="my" class="nav-item" @click.native="$router.push('/my')">
         <i class="fa fa-user icon-default"></i>
         <div class="margin-top-s">我</div>
       </mt-tab-item>
@@ -41,20 +40,12 @@
 
 <script>
   export default{
-    name: "AppNav",
+    name: "app-nav",
+    props: ["navId"],
     data: function () {
       return {
-        navId: "home"
-      }
-    },
-    created: function () {
-
-    },
-    methods: {
-        onNavClick: function (navId, navRouter) {
-          this.$store.commit("setNavId", navId);
-          this.$router.push(navRouter);
-        }
+        currentNavId: this.navId
+      };
     }
   }
 </script>

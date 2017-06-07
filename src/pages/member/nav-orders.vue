@@ -2,13 +2,22 @@
 </style>
 
 <template>
-<div>
-  订单管理页面
-</div>
+  <div>
+    <div class="fadeIn">
+      订单管理页面
+    </div>
+
+    <app-nav navId="orders"></app-nav>
+  </div>
 </template>
 
 <script>
-    export default{
-      name: "orders"
+  import AppNav from '@/components/layouts/app-nav.vue';
+
+  export default{
+    name: "orders",
+    components: {
+        "app-nav": AppNav
     }
+  }
 </script>

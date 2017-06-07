@@ -2,13 +2,22 @@
 </style>
 
 <template>
-<div>
-  设备管理页面
-</div>
+  <div>
+    <div class="fadeIn">
+      设备管理页面
+    </div>
+
+    <app-nav navId="devices"></app-nav>
+  </div>
 </template>
 
 <script>
-    export default{
-      name: "devices"
+  import AppNav from '@/components/layouts/app-nav.vue';
+
+  export default{
+    name: "devices",
+    components: {
+      "app-nav": AppNav
     }
+  }
 </script>

@@ -14,24 +14,46 @@
 
 <template>
   <div>
-    <div class="header">
-      <img src="~img/avatar.png" width="100" height="100" class="img-circle"/>
+    <app-view>
+      <div class="fadeIn">
+        <div class="header">
+          <img src="~img/avatar.png" width="100" height="100" class="img-circle"/>
 
-      <div class="color-white font-l margin-top">hucw</div>
-    </div>
+          <div class="color-white font-l margin-top">hucw</div>
+        </div>
 
-    <div class="padding-m">
-      <i class="fa fa-user"></i>
-    </div>
+      </div>
+    </app-view>
 
-    <div class="padding-m">
-      <img src="~img/test.jpg"/>
-    </div>
+    <app-nav navId="home"></app-nav>
   </div>
 </template>
 
 <script>
+  import AppNav from '@/components/layouts/app-nav.vue';
+
   export default {
-    name: 'member'
+    name: 'member',
+    components: {
+      "app-nav": AppNav
+    },
+    /*data: function () {
+      return {
+        isLoading: true,
+        isEmpty: true
+      }
+    },*/
+    created: function () {
+      /*const url = "http://gank.io/api/day/history";
+       this.$http.get(url)
+       .then(function (resp) {
+       console.log(resp.data.results);
+       })*/
+
+      /*setTimeout(() => {
+        this.isLoading = false;
+        console.log(this.isLoading);
+      }, 3000)*/
+    }
   }
 </script>

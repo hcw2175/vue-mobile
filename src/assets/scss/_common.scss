@@ -8,13 +8,27 @@ body {
   margin: 0;
 }
 
-// 顶级容器
-#app{
-  margin: 0 auto;
-  background: $white;
-  max-width: $max-width;
-}
-
 img {
   max-width: 100%;
+}
+
+input {
+  @include placeholder();
+}
+
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
 }

@@ -1,27 +1,43 @@
-<style lang="scss" scoped type="text/scss">
+<style scoped lang="scss" type="text/scss">
   @import "~variables";
 
-  .fadein{
-    @include fadeIn()
+  .empty-icon{
+    font-size: rem(80px);
   }
-  .fadeOut {
-    @include fadeOut();
-  }
-
 </style>
 
 <template>
-<div class="app-view">
-  <transition name="custom-classes-transition"
-              enter-active-class="fadein"
-              leave-active-class="fadeout">
-    <router-view></router-view>
-  </transition>
-</div>
+  <div>
+    <div class="padding align-center bg-gray" v-show="isLoading && !isEmpty">
+      <div class="inline-block">
+        <mt-spinner type="double-bounce" color="#19be6b" :size="32"></mt-spinner>
+      </div>
+      <p class="font-lighter margin-top-s">努力加载中...</p>
+    </div>
+
+    <div v-show="!isLoading && !isEmpty">
+      <slot></slot>
+    </div>
+
+    <div class="padding-m align-center font-light" v-show="isEmpty">
+      <i class="iconfont icon-sad empty-icon"></i>
+      <p class="font-lighter margin-top">这里什么都没有</p>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default{
-      name: "AppView"
+  export default{
+    name: "app-view",
+    props: {
+      isLoading: {
+        type: Boolean,
+        default: false
+      },
+      isEmpty: {
+        type: Boolean,
+        default: false
+      },
     }
+  }
 </script>
