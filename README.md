@@ -4,9 +4,8 @@
 ## 快速开始
 
 ``` bash
-# 安装依赖，推荐使用cnpm，节省大量时间
-# 若cnpm安装出现依赖问题，可以先卸载再用npm重新安装
-cnpm install
+# 安装依赖，推荐使用淘宝仓库，节省大量时间
+npm install --registry=https://registry.npm.taobao.org 
 
 # 本地开发，服务端口: 8000
 npm run dev

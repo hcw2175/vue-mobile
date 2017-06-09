@@ -22,7 +22,7 @@ export default new Router({
     // 登录页面
     {
       path: '/',
-      redirect: "/login"
+      redirect: "/home"
     },
     {
       path: '/login',

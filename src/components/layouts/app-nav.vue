@@ -17,7 +17,7 @@
 
 <template>
   <div class="app-nav">
-    <mt-tabbar class="app-nav-tabbar" :fixed="true" v-model="currentNavId">
+    <!--<mt-tabbar class="app-nav-tabbar" :fixed="true" v-model="currentNavId">
       <mt-tab-item id="home" class="nav-item" @click.native="$router.push('/')">
         <i class="fa fa-home icon-default"></i>
         <div class="margin-top-s">首页</div>
@@ -34,7 +34,7 @@
         <i class="fa fa-user icon-default"></i>
         <div class="margin-top-s">我</div>
       </mt-tab-item>
-    </mt-tabbar>
+    </mt-tabbar>-->
   </div>
 </template>
 

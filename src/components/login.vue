@@ -46,7 +46,7 @@
     display: block;
     width: 100%;
     margin-top: rem(50px);
-    border-radius: rem(20px);
+    border-radius: rem(25px);
   }
 </style>
 
@@ -66,7 +66,7 @@
     </label>
 
 
-    <mt-button type="primary" class="btn-block">登录</mt-button>
+    <x-button type="primary" class="btn-block">登录</x-button>
   </div>
 </div>
 </template>

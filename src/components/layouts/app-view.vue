@@ -1,7 +1,7 @@
 <style scoped lang="scss" type="text/scss">
   @import "~variables";
 
-  .empty-icon{
+  .empty-icon {
     font-size: rem(80px);
   }
 </style>
@@ -10,7 +10,8 @@
   <div>
     <div class="padding align-center bg-gray" v-show="isLoading && !isEmpty">
       <div class="inline-block">
-        <mt-spinner type="double-bounce" color="#19be6b" :size="32"></mt-spinner>
+        <!--<mt-spinner type="double-bounce" color="#19be6b" :size="32"></mt-spinner>-->
+        <spinner type="ripple" slot="value"></spinner>
       </div>
       <p class="font-lighter margin-top-s">努力加载中...</p>
     </div>
@@ -27,6 +28,8 @@
 </template>
 
 <script>
+  import {Spinner} from 'vux'
+
   export default{
     name: "app-view",
     props: {
@@ -38,6 +41,7 @@
         type: Boolean,
         default: false
       },
-    }
+    },
+    components: {Spinner}
   }
 </script>

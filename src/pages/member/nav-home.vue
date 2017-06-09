@@ -22,6 +22,13 @@
           <div class="color-white font-l margin-top">hucw</div>
         </div>
 
+        <div class="padding align-center margin-top font-l">
+          <router-link to="/devices/iwater">查看水机详情</router-link>
+        </div>
+
+        <group>
+          <cell title="title" value="value"></cell>
+        </group>
       </div>
     </app-view>
 
@@ -31,11 +38,14 @@
 
 <script>
   import AppNav from '@/components/layouts/app-nav.vue';
+  import { Group, Cell } from 'vux'
 
   export default {
     name: 'member',
     components: {
-      "app-nav": AppNav
+      AppNav,
+      Group,
+      Cell
     },
     /*data: function () {
       return {

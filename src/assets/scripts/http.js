@@ -35,7 +35,7 @@ axios.interceptors.response.use(
 const baseUrl = process.env.API_HOST_BASE;
 const requestTimeOut = process.env.REQUEST_TIME_OUT;
 
-export default{
+export default {
   
   /**
    * POST 请求

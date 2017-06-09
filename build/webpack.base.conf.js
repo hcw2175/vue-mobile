@@ -2,6 +2,7 @@
  * webpack 构建基本配置
  */
 let path = require('path');
+let vuxLoader = require('vux-loader');
 
 let utils = require('./utils');
 let config = require('../config');
@@ -17,15 +18,12 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-/**
- * 导出webpack配置
- */
-module.exports = {
+const webpackConfig = {
   // 入口js文件
   entry: {
     app: './src/main.js'
   },
-
+  
   // 构建输出配置
   output: {
     // 输出目录
@@ -37,13 +35,13 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
-
+  
   // 解析配置
   resolve: {
     // 自动解析以下扩展命的文件
     // 导入时不用跟扩展名，如 import '/routers'
     extensions: ['.js', '.vue', '.json'],
-
+    
     // 别名配置
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
@@ -52,13 +50,13 @@ module.exports = {
       'variables': resolve('src/assets/scss/exports.scss'),
     }
   },
-
+  
   // 模块配置
   module: {
-
+    
     // 规则配置
     rules: [
-
+      
       // 对js/vue文件进行eslint校验
       {
         test: /\.(js|vue)$/,
@@ -69,7 +67,7 @@ module.exports = {
           formatter: require('eslint-friendly-formatter')
         }
       },
-
+      
       // vue-loader，参考：https://vue-loader.vuejs.org/zh-cn/
       // 允许vue文件导出为module
       {
@@ -77,7 +75,7 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
-
+      
       // babel-loader，参考：https://github.com/babel/babel-loader
       // 允许对js文件进行语法转换
       {
@@ -85,7 +83,7 @@ module.exports = {
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },
-
+      
       // url-loader，参考：https://github.com/webpack-contrib/url-loader
       // 对图片文件路径进行MD5序列化，同时限定小于 10kb 将返回 DataUrl
       {
@@ -96,7 +94,7 @@ module.exports = {
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
-
+      
       // url-loader，参考：https://github.com/webpack-contrib/url-loader
       // 对字体图标文件路径进行MD5序列化，同时限定小于 10kb 将返回 DataUrl
       {
@@ -110,3 +108,11 @@ module.exports = {
     ]
   }
 };
+
+/**
+ * 导出webpack配置
+ */
+//module.exports = webpackConfig;
+module.exports = vuxLoader.merge(webpackConfig, {
+  plugins: ['vux-ui']
+});
