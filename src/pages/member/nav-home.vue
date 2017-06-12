@@ -37,16 +37,12 @@
 </template>
 
 <script>
-  import AppNav from '@/components/layouts/app-nav.vue';
-  import { Group, Cell } from 'vux'
+  import App from '@/assets/scripts/app';
+  import AppNav from '@/components/app-nav.vue';
 
   export default {
     name: 'member',
-    components: {
-      AppNav,
-      Group,
-      Cell
-    },
+    components: { AppNav },
     /*data: function () {
       return {
         isLoading: true,

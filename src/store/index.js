@@ -7,15 +7,25 @@
 
 import Vue from "vue";
 import Vuex from "vuex";
+import StoreActions from "./actions";
 import App from "@/assets/scripts/app";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   stage: {
+    token: "",
     navId: ""
   },
   mutations: {
+    /*[StoreActions.oauth.authorize]: (state, data) => {
+    
+    },
+  
+    [StoreActions.oauth.logout]: (state, data) => {
+    
+    },*/
+    
     getNavId: function (state) {
       if(state.navId !== "") {
         return state.navId;

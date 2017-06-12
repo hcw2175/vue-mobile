@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import AppNav from '@/components/layouts/app-nav.vue';
+  import AppNav from '@/components/app-nav.vue';
 
   export default{
     name: "my",

@@ -7,7 +7,9 @@ const prodEnv = require('./prod.env');
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_HOST_BASE: '"http://192.168.199.248/api/v1/"',
-  API_HOST_UA: '"http://192.168.199.248/api/v1/ua"',
-  API_HOST_WOS: '"http://192.168.199.248/api/v1/wos"'
+  
+  HOST_BASE: '"/baseUrl"',
+  API_HOST_BASE: '"/api"',
+  API_HOST_UA: '"/api/ua"',
+  API_HOST_WOS: '"/api/wos"'
 });

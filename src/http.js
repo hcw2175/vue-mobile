@@ -5,31 +5,64 @@
  * @date   2017-01-06
  */
 import axios from 'axios';
+import store from './store'
+import storeActions from './store/actions'
+import router from './routers';
 
 // 设置ContentType
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-// 设置token
-axios.defaults.headers.common['x-auth-token'] = 'x-auth-token';
-/*axios.defaults.headers.common['x-requested-from'] = 'apiHttpRequest';*/
+axios.defaults.headers.common['x-requested-from'] = 'apiHttpRequest';
+axios.defaults.headers.common['x-auth-token'] = '';
 
 // 打印请求参数
-axios.defaults.transformRequest = [function (data) {
+/*axios.defaults.transformRequest = [function (data) {
   if (data) {
     console.log('请求参数：' + JSON.stringify(data));
   }
   return data;
-}];
+}];*/
+
+// http request 拦截器
+/*axios.interceptors.request.use(
+  (config) => {
+    if (store.state.token && store.state.token !== "") {
+      config.headers.Authorization = store.state.token;
+      config.headers['x-auth-token'] = store.state.token;
+    }
+    return config;
+  },
+  (err) => Promise.reject(err));*/
 
 // 请求返回拦截器
 axios.interceptors.response.use(
-  function (response) {
-    return response;
+  (response) => {
+    if(response.returnCode === 0) {
+      return response;
+    } else {
+      return response;
+    }
   },
-  function (error) {
-    // TODO 统一错误处理
-    return error;
-  });
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+    /*if (error.response) {
+      const status = error.response.status;
+      if(status === 401) {
+        // 401 清除token信息并跳转到登录页面
+        store.commit(storeActions.oauth.logout);
+        router.replace({
+          path: '/login',
+          query: {redirect: router.currentRoute.fullPath}
+        });
+      }
+    }
+    // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
+    if(process.env.development === "development") {
+      console.log(JSON.stringify(error));
+    }
+    return Promise.reject(error.response.data)*/
+  }
+);
 
 // 常量配置
 const baseUrl = process.env.API_HOST_BASE;

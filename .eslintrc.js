@@ -286,7 +286,7 @@ module.exports = {
     // require return statements after callbacks
     "callback-return": 0,
     // 要求 require() 出现在顶层模块作用域中
-    "global-require": 1,
+    "global-require": 0,
     // 要求回调函数中有容错处理
     "handle-callback-err": [2, "^(err|error)$"],
     // 禁止混合常规 var 声明和 require 调用

@@ -48,6 +48,7 @@ const webpackConfig = {
       '@': resolve('src'),
       'img': resolve('src/assets/images'),
       'variables': resolve('src/assets/scss/exports.scss'),
+      'app': resolve('src/assets/scripts/app.js')
     }
   },
   
