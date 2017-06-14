@@ -4,6 +4,7 @@
  */
 module.exports = {
   NODE_ENV: '"production"',
+  
   HOST_BASE: '"http://api.xohaa.net"',
   API_HOST_BASE: '"http://api.xohaa.net/api/v1"',
   API_HOST_UA: '"http://api.xohaa.net/api/v1/ua"',

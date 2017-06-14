@@ -244,3 +244,18 @@
 .margin-right-xl { @extend %margin-right-xl; }
 .margin-right-xxl { @extend %margin-right-xxl; }
 .margin-right-zero { margin-right: 0 !important; }
+
+
+// -----------------
+// 高度全屏
+.full-height{
+  min-height: 100%;
+  height: 100%;
+}
+
+
+// -----------------
+// 水纹效果
+.ripple {
+  @extend %ripple;
+}

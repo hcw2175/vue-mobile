@@ -7,42 +7,32 @@
 
 import Vue from "vue";
 import Vuex from "vuex";
-import StoreActions from "./actions";
-import App from "@/assets/scripts/app";
+
+import auth from "./modules/auth";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  stage: {
-    token: "",
-    navId: ""
+  state: {
+    showLoading: false,
+    showEmptyView: false
   },
   mutations: {
-    /*[StoreActions.oauth.authorize]: (state, data) => {
-    
+    showLoading: function (state) {
+      state.showLoading = true;
     },
-  
-    [StoreActions.oauth.logout]: (state, data) => {
-    
-    },*/
-    
-    getNavId: function (state) {
-      if(state.navId !== "") {
-        return state.navId;
-      }
-
-      if(App.cache.hasKey("navId")) {
-        state.navId = App.cache.getItem("navItem")
-      }  else {
-        state.navId = "home";
-      }
-      return state.navId;
+    hideLoading: function (state) {
+      state.showLoading = false;
     },
-
-    setNavId: function (state, navId) {
-      console.log("set nav id：" + navId);
-      state.navId = navId;
-      App.cache.put("navId", navId);
+    showEmptyView: function (state) {
+      state.showEmptyView = true
+    },
+    hideEmptyView: function (state) {
+      state.showEmptyView = false
     }
+  },
+
+  modules: {
+    auth
   }
 });

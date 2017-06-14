@@ -3,9 +3,9 @@
  */
 import Vue from 'vue';
 import App from './app.vue';
-import router from './routers';
+import router from './routes';
 import store from './store';
-import http from './http';
+import MutationTypes from "@/store/mutation-types";
 
 // 第三方组件库
 require('es6-promise').polyfill();
@@ -13,27 +13,33 @@ require('es6-promise').polyfill();
 import './assets/fonts/font-awesome/css/font-awesome.min.css';
 import './assets/fonts/iconfont/iconfont.css';
 
-// 引入vux通用的组件
-import {ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin} from 'vux'
-Vue.use(ToastPlugin);
-Vue.use(AlertPlugin);
-Vue.use(ConfirmPlugin);
-Vue.use(LoadingPlugin);
+// 引入mint-ui组件：https://mint-ui.github.io/docs/#/zh-cn2
+import 'mint-ui/lib/style.css';
+import MintUI from 'mint-ui';
+Vue.use(MintUI);
 
-// 引入vux通用页面组件
-import {Group, Cell, XButton, Flexbox} from 'vux';
-Vue.component('group', Group);
-Vue.component('cell', Cell);
-Vue.component('x-button', XButton);
-Vue.component('flexbox', Flexbox);
+// 全局toast: https://github.com/chengxulvtu/cxlt-vue2-toastr
+// 使用方法：this.$toast.succes(),this.$toast.error()
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
+import CxltToastr from 'cxlt-vue2-toastr';
+Vue.use(CxltToastr, {
+  position: 'top full width',
+  timeOut: 3000,
+  closeButton: true
+});
 
-// 注册组件
+// Vue事件总线封装：https://github.com/yangmingshan/vue-bus
+import VueBus from 'vue-bus';
+Vue.use(VueBus);
+
+// 注册自定义组件
 import './assets/scss/app.scss';
-import AppView from '@/components/app-view.vue';
+import AppView from '@/components/layouts/app-view.vue';
 
 Vue.component("app-view", AppView);
 
 // 其它配置
+import http from './http';
 Vue.prototype.$http = http;
 Vue.prototype.$basehost = process.env.HOST_BASE;
 Vue.prototype.$apihost = process.env.API_HOST_BASE;
@@ -42,16 +48,22 @@ Vue.prototype.$woshost = process.env.API_HOST_WOS;
 Vue.config.productionTip = false;
 
 // 路由登录拦截
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   // 默认所有路由都需要授权
   // 例外请在路由中配置： { meta: { requireAuth: true } }
-  const requireAuth = to.meta.requireAuth || true;
-  if(requireAuth) {
+  let requireAuth = to.meta.requireAuth;
+  if (typeof (requireAuth) === "undefined") {
+    requireAuth = true;
+  }
+
+  if (requireAuth === true) {
     // 通过vuex state获取当前的token是否存在
-    if (store.state.token && store.state.token !== "") {
+    const token = store.getters[MutationTypes.oauth.getAuthToken];
+    if (token !== null && token !== "") {
       next();
     } else {
       // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      console.log("授权信息失效，重新登录...");
       next({
         path: '/login',
         query: {redirect: to.fullPath}
@@ -60,7 +72,7 @@ Vue.config.productionTip = false;
   } else {
     next();
   }
-});*/
+});
 
 // 实例化
 new Vue({
@@ -68,5 +80,29 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: {App}
+  components: {App},
+  mounted: function () {
+    // 监听错误输出
+    this.$bus.on('toast-error', (msg) => {
+      this.$toast.error({
+        message: msg
+      });
+    });
+
+    // 监听登录处理
+    this.$bus.on("oauth", () => {
+      this.$toast.error({
+        message: "请重新登录"
+      });
+      //store.commit(MutationTypes.oauth.updateAuthToken, "");
+      router.replace({
+        path: '/login',
+        query: {redirect: router.currentRoute.fullPath}
+      })
+    });
+  },
+  beforeDestroy() {
+    // 取消事件监听
+    this.$bus.off('event-error');
+  },
 });

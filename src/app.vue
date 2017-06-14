@@ -17,8 +17,9 @@
 
   #app{
     margin: 0 auto;
-    background: $white;
     max-width: $max-width;
+    height: 100%;
+    min-height: 100%;
     position: relative;
   }
 </style>
@@ -42,7 +43,7 @@
     watch: {
       $route: function (to, from) {
         // 首页4个导航不需要动画
-        const exculdeRoute = "member,devices,orders,my";
+        const exculdeRoute = "member,devices,orders,my,login,logout,accesstoken";
         if(exculdeRoute.indexOf(to.name) > -1) {
           this.transitionName = "";
           return ;

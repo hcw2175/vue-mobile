@@ -10,8 +10,7 @@
   <div>
     <div class="padding align-center bg-gray" v-show="isLoading && !isEmpty">
       <div class="inline-block">
-        <!--<mt-spinner type="double-bounce" color="#19be6b" :size="32"></mt-spinner>-->
-        <spinner type="ripple" slot="value"></spinner>
+        <mt-spinner type="double-bounce" color="#bbbec4" :size="28"></mt-spinner>
       </div>
       <p class="font-lighter margin-top-s">努力加载中...</p>
     </div>
@@ -28,20 +27,15 @@
 </template>
 
 <script>
-  import {Spinner} from 'vux'
-
   export default{
     name: "app-view",
-    props: {
-      isLoading: {
-        type: Boolean,
-        default: false
+    computed: {
+      isLoading: function () {
+        return this.$store.state.showLoading;
       },
-      isEmpty: {
-        type: Boolean,
-        default: false
-      },
-    },
-    components: {Spinner}
+      isEmpty: function () {
+        return this.$store.state.showEmptyView;
+      }
+    }
   }
 </script>

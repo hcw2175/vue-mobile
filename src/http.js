@@ -5,14 +5,12 @@
  * @date   2017-01-06
  */
 import axios from 'axios';
-import store from './store'
-import storeActions from './store/actions'
-import router from './routers';
+import Vue from 'vue';
+import store from './store';
+import types from './store/mutation-types';
 
 // 设置ContentType
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.headers.common['x-requested-from'] = 'apiHttpRequest';
-axios.defaults.headers.common['x-auth-token'] = '';
 
 // 打印请求参数
 /*axios.defaults.transformRequest = [function (data) {
@@ -23,44 +21,61 @@ axios.defaults.headers.common['x-auth-token'] = '';
 }];*/
 
 // http request 拦截器
-/*axios.interceptors.request.use(
+axios.interceptors.request.use(
   (config) => {
-    if (store.state.token && store.state.token !== "") {
-      config.headers.Authorization = store.state.token;
-      config.headers['x-auth-token'] = store.state.token;
+    const token = store.getters[types.oauth.getAuthToken];
+    if (token !== null && token !== "") {
+      config.headers['x-requested-from'] = "apiHttpRequest";
+      config.headers['x-auth-token'] = token;
     }
     return config;
   },
-  (err) => Promise.reject(err));*/
+  (err) => Promise.reject(err));
 
-// 请求返回拦截器
+
+// http response 拦截器
+let emitError = function (errorMsg) {
+  let msg = "抱歉，系统出现未知异常。";
+  if(errorMsg && errorMsg !== null && errorMsg !== "") {
+    msg = "系统异常：" + errorMsg;
+  }
+  Vue.bus.emit("toast-error", msg);
+};
+
 axios.interceptors.response.use(
   (response) => {
-    if(response.returnCode === 0) {
-      return response;
+    const respData = response.data;
+    // 状态码为0表示请求成功，否则失败
+    if(respData.code === 0 || respData.returnCode === 0) {
+      return respData.data;
     } else {
-      return response;
+      // 未授权登录
+      if(respData.httpStatusCode === 401) {
+        Vue.bus.emit("oauth");
+      } else {
+        emitError(respData.errMsg + "(" + respData.code + ")");
+      }
+      return Promise.reject(respData);
     }
   },
   (error) => {
-    console.log(error);
-    return Promise.reject(error);
-    /*if (error.response) {
-      const status = error.response.status;
-      if(status === 401) {
-        // 401 清除token信息并跳转到登录页面
-        store.commit(storeActions.oauth.logout);
-        router.replace({
-          path: '/login',
-          query: {redirect: router.currentRoute.fullPath}
-        });
+    const response = error.response;
+    let errMsg = "";
+    if(response && response.data){
+      // 未授权登录
+      if(response.data.httpStatusCode === 401) {
+        Vue.bus.emit("oauth");
+      } else {
+        // 其它错误信息处理
+        if(response.data.returnMsg) {
+          errMsg = response.data.returnMsg + "(" + response.data.returnCode + ")"
+        } else if(response.data.errMsg) {
+          errMsg = response.data.errMsg + "(" + response.data.code + ")";
+        }
       }
     }
-    // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
-    if(process.env.development === "development") {
-      console.log(JSON.stringify(error));
-    }
-    return Promise.reject(error.response.data)*/
+    emitError(errMsg);
+    return Promise.reject(error.response.data)
   }
 );
 
@@ -69,7 +84,7 @@ const baseUrl = process.env.API_HOST_BASE;
 const requestTimeOut = process.env.REQUEST_TIME_OUT;
 
 export default {
-  
+
   /**
    * POST 请求
    *
@@ -85,7 +100,7 @@ export default {
       timeout: requestTimeOut
     });
   },
-  
+
   /**
    * GET 请求
    *
@@ -101,7 +116,7 @@ export default {
       timeout: requestTimeOut
     });
   },
-  
+
   /**
    * DELETE请求
    *
@@ -116,7 +131,7 @@ export default {
       timeout: requestTimeOut
     });
   },
-  
+
   /**
    * PUT 请求
    *
@@ -131,7 +146,7 @@ export default {
       timeout: requestTimeOut
     });
   },
-  
+
   /**
    * AJAX请求，自行组装参数
    *

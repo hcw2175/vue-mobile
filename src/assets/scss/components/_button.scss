@@ -1,0 +1,26 @@
+@mixin btn-size($padding-y: 8px, $padding-x: 12px, $line-height: 1.5) {
+  padding: rem($padding-y) rem($padding-x);
+  line-height: $line-height;
+  height: auto;
+}
+
+
+.btn {
+  font-size: $font-size;
+  border-radius: $border-radius;
+  background-image: none;
+  min-width: rem(88px);
+  border-color: $border;
+  @include btn-size();
+  @extend %ripple;
+}
+
+// 按钮大小
+// --------------------------------------------------
+
+.btn-sm{ @include btn-size() }
+
+.btn-block{
+  display: block;
+  width: 100%;
+}
