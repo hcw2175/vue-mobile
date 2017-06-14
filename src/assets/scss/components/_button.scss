@@ -4,21 +4,52 @@
   height: auto;
 }
 
-
 .btn {
   font-size: $font-size;
   border-radius: $border-radius;
-  background-image: none;
   min-width: rem(88px);
-  border-color: $border;
+  background: $white none;
+  box-shadow: none;
+  color: $font-primary;
+  @include border();
+  @include ripple();
   @include btn-size();
-  @extend %ripple;
+}
+
+// 按钮样式
+// --------------------------------------------------
+@mixin btn-color($bg: $primary) {
+  background-color: $bg;
+  border-color: $bg !important;
+  color: $white;
+}
+
+.btn-primary { @include btn-color($primary); }
+.btn-success { @include btn-color($success); }
+.btn-danger { @include btn-color($danger); }
+.btn-info { @include btn-color($info); }
+.btn-warn { @include btn-color($warning); }
+.btn-link {
+  background-color: $white;
+  border-color: $white;
+  color: $primary-light;
 }
 
 // 按钮大小
 // --------------------------------------------------
 
-.btn-sm{ @include btn-size() }
+.btn-sm{
+  font-size: $font-size-s;
+  @include btn-size(5px, 10px)
+}
+.btn-xs{
+  font-size: $font-size-s;
+  @include btn-size(1px, 5px)
+}
+.btn-lg{
+  font-size: $font-size-m;
+  @include btn-size(10px, 16px, 1.3)
+}
 
 .btn-block{
   display: block;

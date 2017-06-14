@@ -3,6 +3,8 @@ import Router from 'vue-router';
 
 import memberRoutes from "./member";
 import wosRoutes from "./wos";
+import uidemoRoutes from "./uidemos";
+
 
 Vue.use(Router);
 
@@ -76,6 +78,7 @@ let routes = [
 ];
 routes = routes.concat(memberRoutes);
 routes = routes.concat(wosRoutes);
+routes = routes.concat(uidemoRoutes);
 
 export default new Router({
   mode: 'history',
