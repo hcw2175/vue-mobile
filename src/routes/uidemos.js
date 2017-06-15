@@ -24,5 +24,25 @@ export default [
     component: function (resolve) {
       require(['@/components/uidemos/buttons'], resolve);
     }
+  },
+  {
+    path: '/ui/forms',
+    name: 'ui-forms',
+    meta: {
+      requireAuth: false
+    },
+    component: function (resolve) {
+      require(['@/components/uidemos/forms'], resolve);
+    }
+  },
+  {
+    path: '/ui/cell',
+    name: 'ui-cell',
+    meta: {
+      requireAuth: false
+    },
+    component: function (resolve) {
+      require(['@/components/uidemos/cell'], resolve);
+    }
   }
 ]

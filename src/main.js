@@ -32,11 +32,16 @@ Vue.use(CxltToastr, {
 import VueBus from 'vue-bus';
 Vue.use(VueBus);
 
+// Vue表单校验：
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
+
 // 注册自定义组件
 import './assets/scss/app.scss';
 import AppView from '@/components/layouts/app-view.vue';
-
+import FormFeild from '@/components/ui/form-field';
 Vue.component("app-view", AppView);
+Vue.component("form-field", FormFeild);
 
 // 其它配置
 import http from './http';

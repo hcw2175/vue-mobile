@@ -253,9 +253,18 @@
   height: 100%;
 }
 
-
 // -----------------
 // 水纹效果
 .ripple {
   @extend %ripple;
+}
+
+
+// -----------------
+// 横线
+hr{
+  border: none;
+  height: rem(1px);
+  background-color: $border;
+  margin: rem(15px) 0;
 }

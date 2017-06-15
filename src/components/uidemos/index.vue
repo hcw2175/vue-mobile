@@ -19,10 +19,14 @@
 <div>
   <div class="row">
     <div class="col">
-      <router-link to="/ui/buttons">Buttons</router-link>
+      <router-link to="/ui/buttons">按钮</router-link>
     </div>
-    <div class="col">Cell</div>
-    <div class="col">Cell</div>
+    <div class="col">
+      <router-link to="/ui/forms">表单</router-link>
+    </div>
+    <div class="col">
+      <router-link to="/ui/cell">Cell</router-link>
+    </div>
     <div class="col">Cell</div>
   </div>
 </div>

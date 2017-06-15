@@ -1,0 +1,52 @@
+// 表单组
+// -------------------------------------------
+.form-group {
+  @include border(bottom);
+  @include border(top);
+  @extend %padding-left-m;
+  background-color: $white;
+}
+
+// 输入框
+// -------------------------------------------
+.form-field {
+  color: $font-primary;
+  @include border(bottom);
+
+  &:last-child{
+    border-bottom: none;
+  }
+}
+
+
+// 复选框
+// -------------------------------------------
+
+
+// mint-ui覆写
+// -------------------------------------------
+.mint-cell-wrapper {
+  font-size: $font-size;
+  align-items: center;
+}
+
+.form-group .mint-cell-wrapper{
+  padding-left: 0;
+  padding-right: rem(10px);
+}
+
+.mint-checklist-title,
+.mint-radiolist-title{
+  display: none;
+}
+
+.mint-checklist-label,
+.mint-radiolist-label{
+  padding-left: 0;
+  @include ripple(darken($gray-light, 20%));
+}
+
+.mint-checkbox-core::after {
+  top: rem(4px);
+  left: rem(7px);
+}
