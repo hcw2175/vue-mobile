@@ -18,7 +18,7 @@
       <slot></slot>
     </mt-field>
 
-    <div class="color-danger padding-s" v-show="computedError" >{{ errorMsg }}</div>
+    <div class="color-danger padding-s align-right font-s" v-show="computedError" >{{ errorMsg }}</div>
   </div>
 </template>
 

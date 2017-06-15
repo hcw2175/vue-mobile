@@ -18,6 +18,9 @@ export default [
   {
     path: '/bind/mobile',
     name: 'bind-mobile',
+    meta: {
+      requireAuth: false
+    },
     component: function (resolve) {
       require(['@/pages/member/bind-mobile'], resolve);
     }

@@ -20,11 +20,12 @@
 
       <hr/>
 
-      <div class="padding-top-m">
+      <div class="padding-top-m align-left">
 
         <p>
           <form-field type="tel" name="mobile" :value="mobile" label="手机号码" placeholder="请输入手机号"
                       v-validate="'required'"
+                      data-vv-as="手机号码"
                       :error-msg="errors.first('mobile')"></form-field>
         </p>
         <p>
@@ -33,9 +34,6 @@
                       :error-msg="errors.first('smsCode')">
             <mt-button size="small" :disabled="canSendCode">获取</mt-button>
           </form-field>
-          <!--<mt-field label="验证码" placeholder="验证码" type="number" v-model="smsCode">
-            <mt-button size="small" :disabled="canSendCode">获取</mt-button>
-          </mt-field>-->
         </p>
 
         <div class="padding-top-l">

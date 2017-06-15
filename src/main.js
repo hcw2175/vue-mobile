@@ -33,8 +33,12 @@ import VueBus from 'vue-bus';
 Vue.use(VueBus);
 
 // Vue表单校验：
-import VeeValidate from 'vee-validate';
-Vue.use(VeeValidate);
+import VeeValidate, { Validator } from 'vee-validate';
+import CN from 'vee-validate/dist/locale/zh_CN';
+Validator.addLocale(CN);
+Vue.use(VeeValidate, {
+  locale: 'zh_CN'
+});
 
 // 注册自定义组件
 import './assets/scss/app.scss';
