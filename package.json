@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "cxlt-vue2-toastr": "^1.0.8",
+    "cxlt-vue2-toastr": "^1.0.9",
     "es6-promise": "^4.1.0",
     "lodash": "^4.17.4",
     "mint-ui": "^2.2.7",

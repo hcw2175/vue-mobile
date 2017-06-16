@@ -1,11 +1,12 @@
 <style scoped lang="scss" type="text/scss">
   @import "~variables";
-  .block-center{
+
+  .block-center {
     width: 100%;
     padding: rem(20px);
   }
 
-  .icon-sec{
+  .icon-sec {
     font-size: 80px;
   }
 
@@ -20,26 +21,29 @@
 
       <hr/>
 
-      <div class="padding-top-m align-left">
+      <form class="padding-top-m align-left">
 
         <p>
-          <form-field type="tel" name="mobile" :value="mobile" label="手机号码" placeholder="请输入手机号"
-                      v-validate="'required'"
+          <form-field type="tel" name="mobile" label="手机号码" placeholder="请输入手机号"
+                      v-model="formData.mobile"
+                      v-validate="'required|mobile'"
                       data-vv-as="手机号码"
                       :error-msg="errors.first('mobile')"></form-field>
         </p>
         <p>
-          <form-field type="tel" name="smsCode" :value="smsCode" label="验证码" placeholder="请输入验证码"
-                      v-validate="'required'"
+          <form-field type="number" name="smsCode" label="验证码" placeholder="请输入验证码"
+                      v-model="formData.smsCode"
+                      v-validate="'required|numeric|min:4|max:4'"
+                      data-vv-as="验证码"
                       :error-msg="errors.first('smsCode')">
-            <mt-button size="small" :disabled="canSendCode">获取</mt-button>
+            <btn-smscode :mobile="formData.mobile" :disabled="canSendCode"></btn-smscode>
           </form-field>
         </p>
 
         <div class="padding-top-l">
-          <mt-button class="btn btn-primary btn-block">立即绑定</mt-button>
+          <button type="button" class="btn btn-primary btn-block" :disabled="!canSubmit">立即绑定</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -49,14 +53,33 @@
     name: "bind-mobile",
     data: function () {
       return {
-        mobile: "15817182175",
-        smsCode: "",
-
-        canSendCode: true
+        formData: {
+          mobile: "",
+          smsCode: "",
+        }
       };
     },
-    created: function () {
-        console.log(this.mobile);
+    methods: {
+        submit: function () {
+          this.$validator.validateAll()
+            .then(() => {
+
+              this.$loading.open();
+              this.$http.post(this.$uahost + "/bind/mobile", this.formData)
+                .then(() => {
+                  // do nothing
+                });
+            });
+        }
+    },
+    computed: {
+        canSendCode: function () {
+          return !this.errors.has("mobile") && (this.fields.mobile && this.fields.mobile.valid);
+        },
+        canSubmit: function () {
+          // 所有字段都已校验过且没有校验错误了
+          return Object.keys(this.fields).every((key) => this.fields[key].valid) && !this.errors.any();
+        }
     }
   }
 </script>

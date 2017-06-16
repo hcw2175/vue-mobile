@@ -16,6 +16,7 @@
   @include btn-size();
 }
 
+
 // 按钮样式
 // --------------------------------------------------
 @mixin btn-color($bg: $primary) {
@@ -35,16 +36,22 @@
   color: $primary-light;
 }
 
+.btn:disabled {
+  @include opacity(0.6);
+}
+
 // 按钮大小
 // --------------------------------------------------
 
-.btn-sm{
+.btn-sm {
   font-size: $font-size-s;
-  @include btn-size(5px, 10px)
+  @include btn-size(5px, 10px);
+  min-width: 0;
 }
 .btn-xs{
   font-size: $font-size-s;
-  @include btn-size(1px, 5px)
+  @include btn-size(1px, 5px);
+  min-width: 0;
 }
 .btn-lg{
   font-size: $font-size-m;

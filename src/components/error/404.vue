@@ -7,7 +7,7 @@
 </style>
 
 <template>
-  <div class="full-height valign-center font-light">
+  <div class="full-height valign-center font-light bg-white">
     <div class="align-center block-center">
 
       <img src="~img/404.png" class="tips"/>

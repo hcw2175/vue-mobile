@@ -139,7 +139,7 @@ module.exports = {
     //    参数： allowKeywords：true 使用保留字做属性名时，只能使用.方式取属性
     //                          false 使用保留字做属性名时, 只能使用[]方式取属性 e.g [2, {"allowKeywords": false}]
     //           allowPattern:  当属性名匹配提供的正则表达式时，允许使用[]方式取值,否则只能用.号取值 e.g [2, {"allowPattern": "^[a-z]+(_[a-z]+)+$"}]
-    "dot-notation": [2, {"allowKeywords": false}],
+    "dot-notation": [2, {"allowKeywords": true}],
     // 使用 === 替代 == allow-null允许null和undefined==
     "eqeqeq": [2, "allow-null"],
     // 要求 for-in 循环中有一个 if 语句

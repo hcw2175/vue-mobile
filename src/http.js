@@ -47,7 +47,10 @@ axios.interceptors.response.use(
     const respData = response.data;
     // 状态码为0表示请求成功，否则失败
     if(respData.code === 0 || respData.returnCode === 0) {
-      return respData.data;
+      if(respData.data !== null){
+        return respData.data;
+      }
+      return respData;
     } else {
       // 未授权登录
       if(respData.httpStatusCode === 401) {
