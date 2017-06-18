@@ -117,7 +117,7 @@ new Vue({
   mounted: function () {
     // 监听错误输出
     this.$bus.on('toast-error', (msg) => {
-      this.$loading.close();
+      this.$loading.hide();
       this.$toast.error({
         message: msg
       });

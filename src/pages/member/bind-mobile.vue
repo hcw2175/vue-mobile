@@ -41,7 +41,7 @@
         </p>
 
         <div class="padding-top-l">
-          <button type="button" class="btn btn-primary btn-block" :disabled="!canSubmit">立即绑定</button>
+          <button type="button" class="btn btn-primary btn-block" :disabled="!canSubmit" @click="submit">立即绑定</button>
         </div>
       </form>
     </div>
@@ -56,6 +56,7 @@
         formData: {
           mobile: "",
           smsCode: "",
+          shopId: this.$store.state.auth.curShop.id
         }
       };
     },
@@ -63,11 +64,11 @@
         submit: function () {
           this.$validator.validateAll()
             .then(() => {
-
-              this.$loading.open();
-              this.$http.post(this.$uahost + "/bind/mobile", this.formData)
+              this.$loading.show();
+              this.$http.post(this.$uahost + "/shop/member/bind/mobile", this.formData)
                 .then(() => {
-                  // do nothing
+                  this.$loading.hide();
+                  this.$router.replace("/home");
                 });
             });
         }

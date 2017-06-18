@@ -53,7 +53,7 @@ axios.interceptors.response.use(
       return respData;
     } else {
       // 未授权登录
-      if(respData.httpStatusCode === 401) {
+      if(respData.httpStatusCode === 401 || respData.code === 1200) {
         Vue.bus.emit("oauth");
       } else {
         emitError(respData.errMsg + "(" + respData.code + ")");
@@ -66,7 +66,7 @@ axios.interceptors.response.use(
     let errMsg = "";
     if(response && response.data){
       // 未授权登录
-      if(response.data.httpStatusCode === 401) {
+      if(response.data.httpStatusCode === 401 || response.data.returnCode === 1200 || response.data.code === 1200) {
         Vue.bus.emit("oauth");
       } else {
         // 其它错误信息处理

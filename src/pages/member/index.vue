@@ -19,7 +19,7 @@
       name: "shop",
       created: function () {
         const shopId = this.$route.params.shopId;
-        this.$http.get(this.$uahost + "/shop/" + shopId + "/auth")
+        this.$http.get(this.$uahost + "/shop/member/" + shopId + "/auth")
           .then((curShop) => {
             this.$store.commit(types.oauth.updateCurShop, curShop);
             this.$store.commit(types.oauth.updateRole, "USER");

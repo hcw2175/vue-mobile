@@ -12,7 +12,7 @@
 
       <img src="~img/404.png" class="tips"/>
 
-      <div class="margin-top-xl font-m">
+      <div class="margin-top-xl font-m" v-show="redirectUri.name !== ''">
         <router-link :to="redirectUri.path" replace>返回{{redirectUri.name}}</router-link>
         <!--<div class="font-m">
           <span v-html="curShopLink"></span>
@@ -35,8 +35,10 @@
         const role = this.$store.getters[MutationTypes.oauth.getRole];
         if (role === "USER") {
           const curShop = this.$store.getters[MutationTypes.oauth.getCurShop];
-          redirect = "/shop_" + curShop.id;
-          name = curShop.name;
+          if(curShop !== null) {
+            redirect = "/shop_" + curShop.id;
+            name = curShop.name;
+          }
         } else {
           redirect = "/wos";
           name = "工单系统";
