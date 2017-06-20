@@ -49,6 +49,8 @@
 </template>
 
 <script>
+  import types from "@/store/mutation-types";
+
   export default{
     name: "bind-mobile",
     data: function () {
@@ -68,6 +70,12 @@
               this.$http.post(this.$uahost + "/shop/member/bind/mobile", this.formData)
                 .then(() => {
                   this.$loading.hide();
+
+                  // 更新用户手机号码
+                  let curUser = this.$store.state.auth.curUser;
+                  curUser.mobile = this.formData.mobile;
+                  this.$store.commit(types.oauth.updateCurUser, curUser);
+
                   this.$router.replace("/home");
                 });
             });

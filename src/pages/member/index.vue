@@ -15,28 +15,28 @@
 <script>
   import types from "@/store/mutation-types";
 
-    export default{
-      name: "shop",
-      created: function () {
-        const shopId = this.$route.params.shopId;
-        this.$http.get(this.$uahost + "/shop/member/" + shopId + "/auth")
-          .then((curShop) => {
-            this.$store.commit(types.oauth.updateCurShop, curShop);
-            this.$store.commit(types.oauth.updateRole, "USER");
+  export default{
+    name: "shop",
+    created: function () {
+      const shopId = this.$route.params.shopId;
+      this.$http.get(this.$uahost + "/shop/member/" + shopId + "/auth")
+        .then((curShop) => {
+          this.$store.commit(types.oauth.updateCurShop, curShop);
+          this.$store.commit(types.oauth.updateRole, "USER");
 
-            const curUser = this.$store.getters[types.oauth.getCurUser];
-            if (curUser !== null){
-                const mobile = curUser.mobile;
-                console.log("当前用户手机号码: " + mobile);
-                if(mobile === null || mobile === "") {
-                  this.$router.replace("/bind/mobile");
-                } else {
-                  this.$router.replace("/home");
-                }
+          const curUser = this.$store.getters[types.oauth.getCurUser];
+          if (curUser !== null) {
+            const mobile = curUser.mobile;
+            console.log("当前用户手机号码: " + mobile);
+            if (mobile === null || mobile === "") {
+              this.$router.replace("/bind/mobile");
             } else {
               this.$router.replace("/home");
             }
-          });
-      }
+          } else {
+            this.$router.replace("/home");
+          }
+        });
     }
+  }
 </script>
